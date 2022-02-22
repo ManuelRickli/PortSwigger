@@ -26,7 +26,7 @@ POST /login HTTP/1.1
 ```
 If any of the provided passwords match, it can be that the response is the logged in page. In this case,the password is still unknown. However, the response can be opened in a browser (assuming the request was made with the burp suite repeater), yielding the account page of the victim.
 
-### Two-Factor Authentication
+#### Two-Factor Authentication
 2FA can be bypassed in case the logic on which it is built upon is flawed. An example is a successful login state after entering correct credentials but before the 2FA took place. In this case, the 2FA step can be skipped entirely.
 
 It can also be that the website uses cookies in order to know whose account is being processed at the moment. A valid request from the attackers login process (after logging in, before the 2FA is generated) can be used to change the current user to the victim's username. This then generates a 2FA for the victim, which can be easily brute-forced.
@@ -37,3 +37,33 @@ A persistent cookie is sometimes used to remember a user session for a long time
 Cookie: stay-logged-in: base64(username:MD5(password))
 ```
 This allows the attacker to bruteforce passwords for a known user until a valid cookie is generated which lets the attacker bypass the login alltogether.
+
+#### Offline Cracking
+Getting acces of a cookie (e.g. with XSS) may allow for decrypting it into it's component as in the example above. Obtaining the hashed password of the user can be used to look up the un-hashed value in a database of common passwords and their hashes.
+
+#### Password Resetting
+Usually there is some form to reset the password in case the user forgot it. An example of a flawed logic is:
+  * The user can reset the password and receives an email with the link to do so
+  * The backend does NOT check the correct token that is provided with the link upon submitting a new password
+  * Instead, a hidden field with the username is used to check which user's password to reset
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

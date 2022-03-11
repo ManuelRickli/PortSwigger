@@ -20,4 +20,8 @@ Sometimes the restriction is based on the HTTP method. Alternative methods might
 ### Horizontal Privesc
 Often the methodologies of horizontal privesc are identical to the ones described above. However, it might be benefitial in terms of complexity to compromise an administrative user's account (horizontal) and then accessing the functionalities (vertical), which is in contrast to accessing administrative functionalitites directly.
 
+#### Multi-Step Processes
+When using multiple steps to perform an action, such as changing a user's priviledges, all of the steps need to be checked for legit access. Is this not the case, the vulnerable step can be repeated by an unauthorized user.
 
+#### Referrer Header
+AC over a header can be abused by altering the request header. One example is the `Referrer` header, which tells from which location the request was made from. Referring from an `\admin` link could therefore allow access to all it's sub-pages, even if the user doesn't have access to the admin page at all.

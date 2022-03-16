@@ -7,5 +7,6 @@ There are different things to try to circumvent DT protection:
   * Expand the path so it results in a valid one after stripping (`....//....//....//etc/passwd` becomes `../../../etc/passwd`)
   * Start from the original directory (`/var/www/images/../../../etc/passwd`)
   * Append a null byte to conform to file endings (`../../../etc/passwd%00.png`)
+  * Obfuscate characters (`../exploit.php` can be written as `..%2fexploit.php`)
 
 A general approach is using the Intruder with the fuzzing DT payload. It enumerates all common methods and may result in acquiring information about possible circumvention methods.

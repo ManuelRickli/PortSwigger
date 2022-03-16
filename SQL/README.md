@@ -14,7 +14,7 @@ SELECT 'A','B' FROM dual
 ### String Concatenation
 In order to get multiple results in one column.
 ```
-Oracle,PostgreSQL				'foo'||'bar'
+Oracle,PostgreSQL			'foo'||'bar'
 Microsoft					'foo'+'bar'
 MySQL						'foo' 'bar' or CONCAT('foo','bar')
 ```
@@ -22,7 +22,7 @@ MySQL						'foo' 'bar' or CONCAT('foo','bar')
 ### Comments
 ```
 Oracle  					--comment
-Microsoft,PostgreSQL				--comment or /*comment*/
+Microsoft,PostgreSQL		--comment or /*comment*/
 MySQL						#comment or -- comment or /*comment*/				
 ```
 
@@ -38,10 +38,10 @@ All databases have a function for string length: `LENGTH()`
 
 ### List Tables & Columns
 ```
-Oracle 				 		SELECT * FROM all_tables
+Oracle 				 	SELECT * FROM all_tables
 						SELECT * FROM all_tab_columns WHERE table_name=''
 
-All others		  			SELECT * FROM information_schema.tables
+All others		  		SELECT * FROM information_schema.tables
 						SELECT * FROM information_schema.columns WHERE table_name = ''
 ```
 

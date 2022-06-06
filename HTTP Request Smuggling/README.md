@@ -1,7 +1,7 @@
 ##### PortSwigger BurpSuite Certification Summary
 # HTTP Request Smuggling
 Here the goal is to craft a request which contains a malicious part which is interpreted differently by the front-end system than by the back-end. With this ambiguity of where the border between requests lies it is possible to make an attacker crafted request be part of the one from a legitimate user.
-![[smuggling-http-request-to-back-end-server.svg]]
+![HTTP_RequestSmuggling](https://github.com/ManuelRickli/PortSwigger/blob/main/HTTP%20Request%20Smuggling/smuggling-http-request-to-back-end-server.svg)
 There are two ways by which the beginning and the end of a request is specified:
 * Content-Length:
 	  It simply states the length of the message

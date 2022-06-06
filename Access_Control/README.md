@@ -24,4 +24,4 @@ Often the methodologies of horizontal privesc are identical to the ones describe
 When using multiple steps to perform an action, such as changing a user's priviledges, all of the steps need to be checked for legit access. Is this not the case, the vulnerable step can be repeated by an unauthorized user.
 
 #### Referrer Header
-AC over a header can be abused by altering the request header. One example is the `Referrer` header, which tells from which location the request was made from. Referring from an `\admin` link could therefore allow access to all it's sub-pages, even if the user doesn't have access to the admin page at all.
+AC over a header can be abused by altering the request header. One example is the `Referer` header, which tells from which location the request was made from. Referring from an `\admin` link could therefore allow access to all it's sub-pages, even if the user doesn't have access to the admin page at all.

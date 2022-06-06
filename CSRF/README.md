@@ -30,7 +30,9 @@ One example is the **check for the CSRF token depending on the request method**.
 
 **Omitting the token alltogether** might work too. It is also possible that **every token from any user** work (the website just checks if it's been assigned, but not to whom).
 
-In the latter case, the exploit can have quite a few steps. Let there be two variables, the `csrf` parameter and a `csrfKey` cookie. They both are linked together, but not to the session at all. This allows an attacker to provide both values and being able to run an action independent of the session cookie set. It is therefore detrimental to set the `csrfKey` for the victim before performing an action in it's name. This can be done with a request that does not enforce the CSRF protection, such as the search function (the injection can happen anywhere on the same domain). So when everything comes together, the attacker delivers a web page to the victim with the following elements:
+In the latter case a valid request from the attacker itself can be intercepted, the token taken and put into the malicious code. This is because the token can be a one time use.
+
+When using multiple frameworks, in this case one for the session handling and one for the CSRF handling, it can be that they are not synced with each other. This means that one cookie is for the session handling and independent from another cookie which tracks the CSRF part. The exploit can have quite a few steps. Let there be two variables, the `csrf` parameter and a `csrfKey` cookie. They both are linked together, but not to the session at all. This allows an attacker to provide both values and being able to run an action independent of the session cookie set. It is therefore detrimental to set the `csrfKey` for the victim before performing an action in it's name. This can be done with a request that does not enforce the CSRF protection, such as the search function (the injection can happen anywhere on the same domain). So when everything comes together, the attacker delivers a web page to the victim with the following elements:
   * A request for the desired action that is automatically triggered
   * The `csrf` parameter in the request
   * The corresponding `csrfKey` in a separate request which sets it for the victim
@@ -51,3 +53,19 @@ In the latter case, the exploit can have quite a few steps. Let there be two var
 
 ```
 This code provides all information that is usually sent with the change email request and then loads an image with the injection point for the `csrfKey` as source. This sets the cookie value for the user (note the `\r\n` and `Set-Cookie: ` ), but fails to load the image, which in return triggers the form being submitted.
+
+Some website omit any server-side tracking of csrf tokens and instead propagate it with request cookies. **Upon validation it is only checked if the token and the cookie values are the same**. So if the attacker can inject a cookie value (e.g. via the search funciton like above) the csrf value can be arbitrary.
+
+Some website check the referring page (i.e. the `Referer` header) for the correct origin of the request and try to prevent CSRF in this way. However, **omitting the referer can be enough to launch the attack**. This can be done with:
+```
+<meta name="referrer" content="never">
+```
+within the HTML page that hosts the attack.
+
+If omitting the referer header doesn't work, it might be possible to launch the attack by incorporating the original website as referer in the request:
+```
+Referer: ATTACKER-HOST?VICTIM-HOST
+Referer: VICTIM-HOST.ATTACKER-HOST
+```
+Appending the victim host address to pass the check can be done with the `history.pushState('', '', '/?VICTIM-HOST')` function. Additionally, use the `Referrer-Policy: unsafe-url` header to make sure the referer header isn't changed by the browser.
+

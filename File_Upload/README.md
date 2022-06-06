@@ -13,7 +13,7 @@ Execute arbitrary shell command by providing the argument `GET /exploit.php?comm
 The apache server utilizes config files in order to determine how a file is handled. It is there where it's specified if a file is run on the server, thus an attacker controlling a config will be able to make their own file executable.
 The local config file `.htaccess` is best suited to do so, as it overrides the global config and is usually easier to create/alter than the one in `/etc/apache2/apache2.conf`.
 
-To execute `php` , the module has to be loader first. With `AddType` arbitrary file extensions can be mapped to an existing one, which will be then handled as such.
+To execute `php` , the module has to be loaded first. With `AddType` arbitrary file extensions can be mapped to an existing one, which will be then handled as such.
 ```
 LoadModule php_module /usr/lib/apache2/modules/libphp.so
 AddType application/x-httpd-php .l33t
